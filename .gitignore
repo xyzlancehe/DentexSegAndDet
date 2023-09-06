@@ -1,0 +1,8 @@
+.vscode/
+**__pycache__
+output**
+**xrays
+**masks
+checkpoints/
+runs/
+dentex_dataset
