@@ -55,13 +55,18 @@ This repository contains our algorithm for the [MICCAI  2023 Dentex challange](h
   ```
 + Process:
 
-  + prepare detection dataset
+  + prepare detection dataset  
+  
     Run each `process...` function in `process_dataset.py` to convert the dataset to expected format (coco or yolo). The processes are intended to be executed sequentially.
-  + train detection models
+  + train detection models  
+  
     Download pretrained weights from each offical repos(swin-transformer, dino, yolo, etc.) and refer to those offical repos and `command_snippets.sh` to train detection models.
-  + prepare segmentaion dataset
+  + prepare segmentaion dataset  
+  
     32-class segmentaion dataset can be generated from the origin dataset. 9-class segmentation dataset depends on the prediction result by a quadrant detection model. See `results/enumeration_dataset_quadrant_predictions.json` for example.
-  + train segmentaion models
+  + train segmentaion models  
+  
     Refer to the `command_snippets.sh`
-  + run prediction
+  + run prediction  
+  
     Choose best checkpoints for each model, rename them or modify the paths in the `predict.py`, and run `predict.py`.

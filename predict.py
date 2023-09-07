@@ -265,27 +265,27 @@ def main():
     confidence_threshold = 0.01
     cuda = True
     iou_match_threshold = 0.3
-    container = True
+    container = False
 
     if container:
         input_image_dir = "/input/images/panoramic-dental-xrays"
         output_json_path = "/output/abnormal-teeth-detection.json"
     else:
         input_image_dir = "./"
-        output_json_path = "./abnormal-teeth-detection.json"
+        output_json_path = "./results/abnormal-teeth-detection.json"
 
     # load models
     quadrant_cfg = get_cfg()
     add_diffusiondet_config(quadrant_cfg)
     add_model_ema_configs(quadrant_cfg)
-    quadrant_cfg.merge_from_file("configs/diffdet.dentex.swinbase.quadrant.yaml")
+    quadrant_cfg.merge_from_file("configs/diffdet/diffdet.dentex.swinbase.quadrant.yaml")
     quadrant_cfg.MODEL.RETINANET.SCORE_THRESH_TEST = confidence_threshold
     quadrant_cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = confidence_threshold
     quadrant_cfg.MODEL.PANOPTIC_FPN.COMBINE.INSTANCES_CONFIDENCE_THRESH = confidence_threshold
     quadrant_cfg.freeze()
     quadrant_predictor = D2DetectionPredictor(quadrant_cfg)
 
-    disease_dino_model_config_path = "configs/DINO_4scale_swin_cls4.py"
+    disease_dino_model_config_path = "configs/dino/DINO_4scale_swin_cls4.py"
     disease_dino_model_checkpoint_path = "checkpoints/dino_swin_disease_all_27.pth"
     disease_dino_cfg = SLConfig.fromfile(disease_dino_model_config_path)
     disease_dino_cfg.device = "cuda" if cuda else "cpu"
@@ -295,7 +295,7 @@ def main():
 
     disease_yolo_predictor = YOLO("checkpoints/yolo_disease_all_25.pt")
 
-    enumeration_detector_config_path = "configs/DINO_4scale_cls32.py"
+    enumeration_detector_config_path = "configs/dino/DINO_4scale_cls32.py"
     enumeration_detector_checkpoint_path = "checkpoints/dino_res50_enum_24.pth"
     enumeration_cfg = SLConfig.fromfile(enumeration_detector_config_path)
     enumeration_cfg.device = "cuda" if cuda else "cpu"
