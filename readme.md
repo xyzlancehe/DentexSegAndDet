@@ -69,4 +69,4 @@ This repository contains our algorithm for the [MICCAI  2023 Dentex challange](h
     Refer to the `command_snippets.sh`
   + run prediction  
   
-    Choose best checkpoints for each model, rename them or modify the paths in the `predict.py`, and run `predict.py`.
+    Choose best checkpoints for each model, rename them or modify the paths in the `predict.py`, and run `predict.py`.  `results/abnormal-teeth-detection.json` is an example output.

@@ -3,6 +3,7 @@
 output**
 **xrays
 **masks
-checkpoints/
+checkpoints
 runs/
 dentex_dataset
+*.mha
